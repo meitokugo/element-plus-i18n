@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <title>project0503</title>
+  </head>
+  <body>
+    <div id="app">
+      <el-button round>{{ message }} </el-button>
+      <el-select v-model="fileOrgType" placeholder="请选择">
+        <el-option label="是" value="Y"> </el-option>
+        <el-option label="否" value="N"></el-option>
+    </el-select>
+    <br>
+    <div>
+        <el-select v-model="option" placeholder="pls pick">
+            <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
+            </el-option>
+        </el-select>
+    </div>
+
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            fileOrgType:"",
+            message: "Hello Element Plus",
+            option:"",
+            options:[
+                {
+                    value:'string',
+                    label:'字符串',
+                },
+                {
+                    vale:'init',
+                    label:'整形',
+                },
+                {
+                    value:'decimal',
+                    label:'数值形',
+                }
+            ],
+          };
+        },
+      };
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
