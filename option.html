@@ -15,22 +15,59 @@
       <el-select v-model="fileOrgType" placeholder="请选择">
         <el-option label="是" value="Y"> </el-option>
         <el-option label="否" value="N"></el-option>
-    </el-select>
-    <br>
-    <div>
+      </el-select>
+      <br>
+      <div>
         <el-select v-model="option" placeholder="pls pick">
             <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
             </el-option>
         </el-select>
-    </div>
+      </div>
+      <!---->
 
+      <div>
+        <el-config-provider :locale="locale1">
+          <br>
+          <el-button m="b-2" > Switch Lang </el-button>
+          <br />
+          <el-color-picker :model-value="''" style="vertical-align: middle" />
+        </el-config-provider>
+        <div class="block">
+          <span class="demonstration">Default</span>
+          <el-date-picker
+            v-model="value1"
+            type="datetime"
+            placeholder="Select date and time"
+          />
+        </div>
+      </div>
     </div>
-    <script>
+    <script lang="ts" setup>
+      
+      const locale1 = ({
+        name: 'zh-cn',
+        el: {
+          colorpicker: {
+            confirm: '确定',
+            clear: '清空',
+          },
+        },
+      })
+      const locale2 = ({
+        name: 'en',
+        el: {
+          colorpicker: {
+            confirm: 'Confirm1',
+            clear: 'Clea11r',
+          },
+        },
+      })
       const App = {
         data() {
           return {
             fileOrgType:"",
             message: "Hello Element Plus",
+            value1:"",
             option:"",
             options:[
                 {
@@ -47,8 +84,13 @@
                 }
             ],
           };
-        },
+        }
       };
+      const toggle = () => {
+        const temp = locale1.value
+        locale1.value = locale2.value
+        locale2.value = temp
+      }
       const app = Vue.createApp(App);
       app.use(ElementPlus);
       app.mount("#app");
